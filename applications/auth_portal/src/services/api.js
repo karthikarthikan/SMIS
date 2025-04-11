@@ -19,9 +19,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const currentPath = window.location.pathname;
+    if (error.response?.status === 401 && currentPath !== '/') {
       removeToken();
-      window.location.href = '/login';
+      window.location.href = '/';
     }
     return Promise.reject(error);
   }
