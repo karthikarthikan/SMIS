@@ -1,0 +1,24 @@
+{ 
+  "name": "admin_portal_backend",
+  "version": "1.0.0",
+  "description": "School Management System - admin Backend",
+  "main": "server.js",
+  "type": "module", 
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "node ./database/migrate.js", 
+    "seed": "node ./database/seed.js" 
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
