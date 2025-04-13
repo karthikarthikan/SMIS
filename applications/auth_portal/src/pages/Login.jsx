@@ -31,14 +31,14 @@ export default function Login() {
 
       if (user) {
         redirectToDashboard(user);
-      }else {
+      } else {
         const hasPermission = user.role === 'admin'; // Example check
         if (!hasPermission) {
           navigate('/unauthorized');
         } else {
           navigate('/dashboard');
         }
-     
+      }
     } catch (err) {
       if (err.response?.status === 401) {
         // Incorrect password error message
