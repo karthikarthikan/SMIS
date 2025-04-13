@@ -2,7 +2,8 @@ import { useState } from 'react';
 import api from '../services/api';
 import { setToken, setUser } from '../utils/auth';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeSlash } from 'react-bootstrap-icons'; 
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
+import { redirectToDashboard } from '../utils/auth'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login() {
@@ -22,6 +23,7 @@ export default function Login() {
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
+
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,17 +31,22 @@ export default function Login() {
     try {
       const res = await api.post('/auth/login', credentials);
       const { token, user } = res.data;
-  
+      console.log('Login response:', res.data); // Debugging line
       // Save token and user
       setToken(token);
       setUser(user);
 
       // Optional: check permission here
-      const hasPermission = user.role === 'admin'; // example check
-      if (!hasPermission) {
-        navigate('/unauthorized');
-      }else{
-        navigate('/dashboard');
+      
+      if (user) {
+        redirectToDashboard(user);
+      }else {
+        const hasPermission = user.role === 'admin'; // Example check
+        if (!hasPermission) {
+          navigate('/unauthorized');
+        } else {
+          navigate('/dashboard');
+        }
       }
       
      
