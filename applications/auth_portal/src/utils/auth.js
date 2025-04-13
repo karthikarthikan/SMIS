@@ -23,3 +23,13 @@ export const setUser = (user) => {
 export const removeUser = () => {
   localStorage.removeItem('user');
 };
+export function redirectToDashboard(user) {
+  if (user.role === "admin") {
+    window.location.href = "http://localhost:3001"; // admin_portal
+  } else if (user.role === "teacher") {
+    window.location.href = "http://localhost:3002"; // teacher_portal
+  }else {
+    // Redirect to unauthorized access page
+    window.location.href = "http://localhost:3000/unauthorized"; // unauthorized access page
+  }
+}

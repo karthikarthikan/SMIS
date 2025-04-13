@@ -70,7 +70,7 @@ export default function Register() {
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>
-              <option value="staff">Staff</option>
+              <option value="teacher">teacher</option>
               {/* Add more roles here if needed */}
             </select>
           </div>
