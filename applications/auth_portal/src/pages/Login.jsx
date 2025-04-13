@@ -2,6 +2,7 @@ import { useState } from 'react';
 import api from '../services/api';
 import { setToken, setUser } from '../utils/auth';
 import { useNavigate, Link } from 'react-router-dom';
+import { Eye, EyeSlash } from 'react-bootstrap-icons'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login() {
@@ -16,6 +17,12 @@ export default function Login() {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const toggleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -74,17 +81,28 @@ export default function Login() {
 
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              className={`form-control ${errorMessage.field === 'password' ? 'is-invalid' : ''}`}
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              value={credentials.password}
-              onChange={handleChange}
-              required
-            />
-             {errorMessage.field === 'password' && <div className="invalid-feedback">{errorMessage.message}</div>}
+            <div className="input-group">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                className={`form-control ${errorMessage.field === 'password' ? 'is-invalid' : ''}`}
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                value={credentials.password}
+                onChange={handleChange}
+                required
+              />
+              <span
+                className="input-group-text"
+                style={{ cursor: 'pointer' }}
+                onClick={toggleShowPassword}
+              >
+                {showPassword ? <EyeSlash /> : <Eye />}
+              </span>
+            </div>
+            {errorMessage.field === 'password' && (
+              <div className="invalid-feedback d-block">{errorMessage.message}</div>
+            )}
           </div>
 
           <button type="submit" className="btn btn-primary w-100 mb-2">
