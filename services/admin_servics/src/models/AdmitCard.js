@@ -14,19 +14,19 @@ const AdmitCard = sequelize.define('AdmitCard', {
   studentId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'students', // Ensure this matches your student table name
-      key: 'id',
-    },
+    // references: {
+    //   model: 'students', // Ensure this matches your student table name
+    //   key: 'id',
+    // },
     onDelete: 'CASCADE',
   },
   examId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'offline_exams', // Ensure this matches your exam table name
-      key: 'id',
-    },
+    // references: {
+    //   model: 'offline_exams', // Ensure this matches your exam table name
+    //   key: 'id',
+    // },
     onDelete: 'CASCADE',
   },
   rollNumber: {
@@ -53,14 +53,14 @@ const AdmitCard = sequelize.define('AdmitCard', {
 });
 
 // Associations (if required)
-AdmitCard.belongsTo(Student, {
-  foreignKey: 'studentId',
-  as: 'student', // alias for easier use
-});
+// AdmitCard.belongsTo(Student, {
+//   foreignKey: 'studentId',
+//   as: 'student', // alias for easier use
+// });
 
-AdmitCard.belongsTo(OfflineExam, {
-  foreignKey: 'examId',
-  as: 'exam', // alias for easier use
-});
+// AdmitCard.belongsTo(OfflineExam, {
+//   foreignKey: 'examId',
+//   as: 'exam', // alias for easier use
+// });
 
 export default AdmitCard;

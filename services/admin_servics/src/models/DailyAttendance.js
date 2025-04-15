@@ -14,19 +14,19 @@ const DailyAttendance = sequelize.define('DailyAttendance', {
   studentId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'students', // Ensure this matches your student table name
-      key: 'id',
-    },
+    // references: {
+    //   model: 'students', // Ensure this matches your student table name
+    //   key: 'id',
+    // },
     onDelete: 'CASCADE',
   },
   classId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'classes', // Ensure this matches your class table name
-      key: 'id',
-    },
+    // references: {
+    //   model: 'classes', // Ensure this matches your class table name
+    //   key: 'id',
+    // },
     onDelete: 'CASCADE',
   },
   date: {
@@ -53,14 +53,14 @@ const DailyAttendance = sequelize.define('DailyAttendance', {
 });
 
 // Associations (if required)
-DailyAttendance.belongsTo(Student, {
-  foreignKey: 'studentId',
-  as: 'student', // alias for easier use
-});
+// DailyAttendance.belongsTo(Student, {
+//   foreignKey: 'studentId',
+//   as: 'student', // alias for easier use
+// });
 
-DailyAttendance.belongsTo(Classroom, {
-  foreignKey: 'classId',
-  as: 'classroom', // alias for easier use
-});
+// DailyAttendance.belongsTo(Classroom, {
+//   foreignKey: 'classId',
+//   as: 'classroom', // alias for easier use
+// });
 
 export default DailyAttendance;
