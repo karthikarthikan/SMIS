@@ -17,6 +17,11 @@ export default function Login() {
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+  const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => {
+     setShowPassword(!showPassword);
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,8 +82,9 @@ export default function Login() {
 
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
+            <div className="input-group">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               className={`form-control ${errorMessage.field === 'password' ? 'is-invalid' : ''}`}
               id="password"
               name="password"
@@ -87,8 +93,16 @@ export default function Login() {
               onChange={handleChange}
               required
             />
-             {errorMessage.field === 'password' && <div className="invalid-feedback">{errorMessage.message}</div>}
-          </div>
+              <span
+                className="input-group-text"
+                style={{ cursor: 'pointer' }}
+                onClick={toggleShowPassword}
+              >
+              {showPassword ? <EyeSlash /> : <Eye />}
+              </span>
+            </div>
+               {errorMessage.field === 'password' && <div className="invalid-feedback">{errorMessage.message}</div>}
+            </div>
 
           <button type="submit" className="btn btn-primary w-100 mb-2">
             Login
